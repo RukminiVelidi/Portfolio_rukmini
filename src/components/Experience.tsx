@@ -1,16 +1,34 @@
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { Briefcase, CalendarBlank } from "phosphor-react";
+import { Briefcase, CalendarBlank, MapPin, FileText } from "phosphor-react";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const experiences = [
   {
+    company: "Amazon",
+    role: "SDE Intern",
+    duration: "May 2026 – July 2026",
+    location: "Recommerce, Bengaluru, India",
+    letter: "", // add a link like "/amazon-2026-letter.pdf" once you upload the file
+    description: "",
+    details: [
+      "Engineered a full-stack data migration tool (React, Java, Spring Boot) replacing a legacy workflow, reducing manual seller operations by 70% across 10K+ daily transactions.",
+      "Optimized backend data-processing services, improving throughput by 40% and reducing P99 latency from 800ms to 200ms.",
+      "Designed RESTful APIs with connection pooling, caching, and auto-scaling for a high-availability distributed architecture; leveraged Amazon Q to accelerate development.",
+      "Automated CI/CD pipelines, cutting deployment cycle from 4 days to under 1 day per feature release; validated changes through code reviews and peer feedback."
+    ],
+    skills: ["React", "Java", "Spring Boot", "REST APIs", "CI/CD", "AWS", "Amazon Q"]
+  },
+  {
     company: "Amazon India",
     role: "SDE Intern",
     duration: "May 2025 – July 2025",
+    location: "",
+    letter: "",
     description: "Architected and developed a full-stack internal web application using React, TypeScript, and Java/Spring Boot to migrate a legacy e-commerce operations system to a modern, scalable solution. Drove a 40% improvement in application performance by re-engineering core business logic.",
+    details: [] as string[],
     skills: ["React", "TypeScript", "Java", "Spring Boot", "DynamoDB", "AWS"]
   }
 ];
@@ -82,6 +100,12 @@ const Experience = () => {
                         <Briefcase size={18} weight="light" />
                         <span className="font-medium">{exp.company}</span>
                       </div>
+                      {exp.location && (
+                        <div className="flex items-center gap-2 mt-1 text-muted-foreground">
+                          <MapPin size={18} weight="light" />
+                          <span>{exp.location}</span>
+                        </div>
+                      )}
                     </div>
                     <div className="flex items-center gap-2 text-accent font-medium">
                       <CalendarBlank size={18} weight="light" />
@@ -89,9 +113,31 @@ const Experience = () => {
                     </div>
                   </div>
 
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
-                    {exp.description}
-                  </p>
+                  {exp.description && (
+                    <p className="text-muted-foreground mb-4 leading-relaxed">
+                      {exp.description}
+                    </p>
+                  )}
+
+                  {exp.details.length > 0 && (
+                    <ul className="list-disc pl-5 space-y-2 text-muted-foreground mb-4 leading-relaxed">
+                      {exp.details.map((point, i) => (
+                        <li key={i}>{point}</li>
+                      ))}
+                    </ul>
+                  )}
+
+                  {exp.letter && (
+                    <a
+                      href={exp.letter}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 mb-4 text-sm font-medium text-accent hover:text-primary transition-colors"
+                    >
+                      <FileText size={18} weight="light" />
+                      Internship Letter
+                    </a>
+                  )}
 
                   <div className="flex flex-wrap gap-2">
                     {exp.skills.map((skill, i) => (
