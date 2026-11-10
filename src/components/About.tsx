@@ -12,7 +12,7 @@ const About = () => {
   const skillsRef = useRef<HTMLDivElement>(null);
 
   const skills = [
-    { name: "Java", icon: "" },
+    { name: "Java", icon: "☕" },
     { name: "Python", icon: "🐍" },
     { name: "React", icon: "⚛️" },
     { name: "Spring Boot", icon: "🍃" },
